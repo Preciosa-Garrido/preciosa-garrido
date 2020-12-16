@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class InvoiceItems extends Model
+{
+    protected $fillable = array('price', 'qtd', 'sale_id', 'product_id');
+
+    public function product() {
+        return $this->belongsTo('App\Models\Product', 'product_id');
+    }
+}
