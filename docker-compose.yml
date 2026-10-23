@@ -1,0 +1,62 @@
+services:
+  database:
+    image: mysql:8.0
+    container_name: preciosa-database
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: preciosa_local
+    ports:
+      - "3307:3306"
+    volumes:
+      - preciosa_database:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ppreciosa_local"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  laravel:
+    build:
+      context: .
+    image: preciosa-garrido:local
+    container_name: preciosa-laravel
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+    environment:
+      LOG_CHANNEL: stderr
+      DB_CONNECTION: mysql
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_DATABASE: preciosa_garrido
+      DB_USERNAME: root
+      DB_PASSWORD: preciosa_local
+    depends_on:
+      database:
+        condition: service_healthy
+
+  wordpress:
+    build:
+      context: ../preciosa-garrido-blog
+    image: preciosa-garrido-blog:local
+    container_name: preciosa-wordpress
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ../preciosa-garrido-blog:/var/www/html
+    environment:
+      WORDPRESS_DB_HOST: database:3306
+      WORDPRESS_DB_NAME: preciosagarridoblog
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: preciosa_local
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  preciosa_database:
