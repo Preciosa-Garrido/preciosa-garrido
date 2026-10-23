@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Image extends Model
 {
@@ -24,7 +25,7 @@ class Image extends Model
 
             $nomeArquivo = "{$nome}.{$extensao}";
 
-            $request->image1->storeAs('public/product/'.kebab_case($request->product), $nomeArquivo);
+            $request->image1->storeAs('public/product/'.Str::kebab($request->product), $nomeArquivo);
 
 
             $name = 'img_alt_'.time();
@@ -33,10 +34,10 @@ class Image extends Model
 
             $archiveName = "{$name}.{$extension}";
 
-            $request->image2->storeAs('public/product/'.kebab_case($request->product), $archiveName);
+            $request->image2->storeAs('public/product/'.Str::kebab($request->product), $archiveName);
 
-            $product['image1'] = kebab_case($request->product).'/'.$nomeArquivo;
-            $product['image2'] = kebab_case($request->product).'/'.$archiveName;
+            $product['image1'] = Str::kebab($request->product).'/'.$nomeArquivo;
+            $product['image2'] = Str::kebab($request->product).'/'.$archiveName;
         endif;
 
         if($this->create($product))
@@ -57,7 +58,7 @@ class Image extends Model
 
             $nomeArquivo = "{$nome}.{$extensao}";
 
-            $request->image1->storeAs('public/product/'.kebab_case($request->product), $nomeArquivo);
+            $request->image1->storeAs('public/product/'.Str::kebab($request->product), $nomeArquivo);
 
             $name = 'img_alt_'.time();
 
@@ -65,10 +66,10 @@ class Image extends Model
 
             $archiveName = "{$name}.{$extension}";
 
-            $request->image2->storeAs('public/product/'.kebab_case($request->product), $archiveName);
+            $request->image2->storeAs('public/product/'.Str::kebab($request->product), $archiveName);
 
-            $product['image1'] = kebab_case($request->product).'/'.$nomeArquivo;
-            $product['image2'] = kebab_case($request->product).'/'.$archiveName;
+            $product['image1'] = Str::kebab($request->product).'/'.$nomeArquivo;
+            $product['image2'] = Str::kebab($request->product).'/'.$archiveName;
         endif;
 
         if($image->fill($product)->update())

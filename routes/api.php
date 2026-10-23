@@ -35,8 +35,6 @@ Route::get('wishlist/{id}', 'Api\WishlistController@index');
 Route::post('wishlist/store', 'Api\WishlistController@store');
 Route::delete('wishlist/destroy/{id}', 'Api\WishlistController@destroy');
 
-Route::post('cart/store', 'Api\CartController@store');
-
 Route::get('admin/chat/{id}/{cliente}', 'Admin\ChatPageController@indexVue');
 Route::post('admin/chat/store', 'Admin\ChatPageController@store');
 

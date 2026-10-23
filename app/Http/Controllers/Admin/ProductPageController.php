@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class ProductPageController extends Controller
 {
@@ -64,9 +65,9 @@ class ProductPageController extends Controller
 
             $nomeArquivo = "{$name}.{$extensao}";
 
-            $product['image'] = kebab_case($request->product).'/'.$nomeArquivo;
+            $product['image'] = Str::kebab($request->product).'/'.$nomeArquivo;
 
-            $request->image->storeAs('public/product/'.kebab_case($request->product), $nomeArquivo);
+            $request->image->storeAs('public/product/'.Str::kebab($request->product), $nomeArquivo);
         endif;
 
         $store = Product::create($product);
@@ -150,9 +151,9 @@ class ProductPageController extends Controller
             $nomeArquivo = "{$name}.{$extensao}";
 
 
-            $product['image'] = kebab_case($request->product).'/'.$nomeArquivo;
+            $product['image'] = Str::kebab($request->product).'/'.$nomeArquivo;
 
-            $request->image->storeAs('public/product/'.kebab_case($request->product), $nomeArquivo);
+            $request->image->storeAs('public/product/'.Str::kebab($request->product), $nomeArquivo);
         endif;
 
         $update = $produto->fill($product)->update();

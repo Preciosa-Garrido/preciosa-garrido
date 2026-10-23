@@ -294,7 +294,7 @@
                                         <span class="title">Ver vendas</span>
                                     </a>
                                 </li>
-                                <li class="panel panel-default dropdown {{ Request::is('*contacts*') ? 'active' : Request::is('*newsletter*') ? 'active' : '' }}">
+                                <li class="panel panel-default dropdown {{ Request::is('*contacts*') ? 'active' : (Request::is('*newsletter*') ? 'active' : '') }}">
                                     <a data-toggle="collapse" href="#dropdown-others">
                                         <span class="icon fa fa-cog"></span><span class="title">Outros</span>
                                     </a>
