@@ -19,7 +19,7 @@ Route::get('/home', 'ShopPageController@home')->name('start.page');
 Route::get('/shop', 'ShopPageController@index')->name('shop.page');
 Route::get('/shop/product/{id}', 'ShopPageController@detail');
 
-$this->group(['prefix' => 'cart'], function() {
+Route::group(['prefix' => 'cart'], function() {
     Route::get('/', 'CartPageController@index')->name('cart.page');
     Route::get('/product/checkout', 'CheckoutPageController@index')->name('checkout');
 });
@@ -42,7 +42,7 @@ Route::post('/newsletter', 'NewsletterPageController@store')->name('newsletter')
  *           CONSUMIDOR
  * ------------------------------------
  */
-$this->group(['prefix' => 'user'], function(){
+Route::group(['prefix' => 'user'], function(){
     Route::get('/myaccount', 'UserPageController@index')->name('myaccount');
     Route::get('/mysales', 'UserPageController@sales')->name('mysales');
     Route::get('/mysales/{id}', 'UserPageController@productsForSale');
@@ -60,12 +60,12 @@ Route::get('/chat/painel/{id}', 'UserPageController@chatGestor');
  * ------------------------------------
  */
 
- $this->group(['prefix' => 'painel'], function(){
+ Route::group(['prefix' => 'painel'], function(){
     Route::get('/login', 'Auth\GestorLoginController@showLoginForm')->name('gestor.login.form');
     Route::post('/login', 'Auth\GestorLoginController@login')->name('gestor.login');
 });
 
-$this->group(['prefix' => 'painel'], function(){
+Route::group(['prefix' => 'painel'], function(){
     Route::get('/', 'PainelPageController@index')->name('painel.homepage');
     Route::get('/home', 'PainelPageController@index')->name('painel.homepage');
 
@@ -94,12 +94,6 @@ $this->group(['prefix' => 'painel'], function(){
      */
     Route::get('/clients', 'ClientesPageController@index')->name('clientes.consultar')->middleware('auth:gestor');
     Route::get('/clients/destroy/{id}', 'ClientesPageController@destroy')->middleware('auth:gestor');
-
-
-    /**
-     * ROTAS PARA AS VIEWS DAS COMPRAS
-     */
-    Route::get('/purchases', 'PurchasePageController@index')->name('purchase');
 
 
     /**
@@ -151,18 +145,18 @@ $this->group(['prefix' => 'painel'], function(){
  * ------------------------------------
  */
 
-$this->group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin'], function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login.form');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login');
     Route::get('/register', 'Auth\AdminRegisterController@showRegisterForm')->name('admin.register.form');
     Route::post('/register', 'Auth\AdminRegisterController@cadastrar')->name('admin.register');
 });
 
-$this->group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin'], function(){
     Route::get('/', 'AdminPageController@index')->name('admin.homepage');
     Route::get('/home', 'AdminPageController@index')->name('admin.homepage');
 
-    $this->group(['namespace' => 'Admin'], function(){
+    Route::group(['namespace' => 'Admin'], function(){
         /**
          * ROTAS PARA AS VIEWS DO CHAT
          */

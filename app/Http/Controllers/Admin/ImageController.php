@@ -6,6 +6,7 @@ use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
 
 class ImageController extends Controller
 {
@@ -80,7 +81,7 @@ class ImageController extends Controller
 
             $nomeArquivo = "{$nome}.{$extensao}";
 
-            $request->image1->storeAs('public/product/'.kebab_case($product->product), $nomeArquivo);
+            $request->image1->storeAs('public/product/'.Str::kebab($product->product), $nomeArquivo);
 
 
             $name = 'img_alt_'.time();
@@ -89,10 +90,10 @@ class ImageController extends Controller
 
             $archiveName = "{$name}.{$extension}";
 
-            $request->image2->storeAs('public/product/'.kebab_case($product->product), $archiveName);
+            $request->image2->storeAs('public/product/'.Str::kebab($product->product), $archiveName);
 
-            $images['image1'] = kebab_case($product->product).'/'.$nomeArquivo;
-            $images['image2'] = kebab_case($product->product).'/'.$archiveName;
+            $images['image1'] = Str::kebab($product->product).'/'.$nomeArquivo;
+            $images['image2'] = Str::kebab($product->product).'/'.$archiveName;
         endif;
 
         if($product->fill($images)->update())
