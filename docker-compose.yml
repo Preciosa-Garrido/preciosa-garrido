@@ -48,7 +48,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ../preciosa-garrido-blog:/var/www/html
+      - ../preciosa-garrido-blog/wp-content/themes/preciosagarrido:/var/www/html/wp-content/themes/preciosagarrido
+      - ../preciosa-garrido-blog/wp-content/uploads:/var/www/html/wp-content/uploads
     environment:
       WORDPRESS_DB_HOST: database:3306
       WORDPRESS_DB_NAME: preciosagarridoblog
