@@ -26,6 +26,17 @@
         "webpack": "5.99.9",
         "webpack-cli": "4.10.0"
     },
+    "overrides": {
+        "terser-webpack-plugin": {
+            "schema-utils": "4.3.2"
+        },
+        "webpack-dev-middleware": {
+            "schema-utils": "4.3.2"
+        },
+        "webpack-dev-server": {
+            "schema-utils": "4.3.2"
+        }
+    },
     "dependencies": {
         "laravel-echo": "^2.2.6",
         "pusher-js": "^8.4.0",

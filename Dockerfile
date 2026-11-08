@@ -2,7 +2,7 @@ FROM node:22-bookworm-slim@sha256:de170b39439eb0e5a3444ad7d60b015614a381e10fecae
 
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci --legacy-peer-deps
+RUN npm ci
 COPY resources ./resources
 COPY webpack.mix.js ./
 RUN npm run production
