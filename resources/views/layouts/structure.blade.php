@@ -99,7 +99,7 @@
 										</li>
 										
 										<li class="nav-item {{ Request::is('blog*') ? 'active' : '' }}">
-											<a class="nav-link" target="_blank" href="http://localhost/preciosagarridoblog">Blog</a>
+											<a class="nav-link" target="_blank" href="https://pgblog.dorivaldovalentim.ao/">Blog</a>
 										</li>
 										<li class="nav-item {{ Request::is('contacts*') ? 'active' : '' }}">
 											<a class="nav-link" href="{{ route('contacts') }}">Contactos</a>
